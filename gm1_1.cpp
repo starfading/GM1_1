@@ -10,7 +10,6 @@ vector<double> GM1_1::GetPredictValue(vector<double> original_arr) {
         cerr << "original array is invalid" << '\n';
         exit(0);
     }
-    // 数据预处理--均匀分布
 
     // 获得预测参数：a,u
     vector<vector<double>> inverse_matrix_b_xbt_xbt_xyn = InverseMatrixBxBTxBTxYN(original_arr);
