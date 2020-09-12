@@ -57,7 +57,7 @@ vector<vector<double>> GM1_1::InverseMatrixBxBTxBTxYN(const vector<double>& orig
 }
 
 vector<vector<double>> GM1_1::MatrixYn(vector<double> original_arr) {
-    vector<vector<double>> matrix_yn(vector<vector<double>>(original_arr.size()-1, vector<double>(1)));
+    vector<vector<double>> matrix_yn(original_arr.size()-1, vector<double>(1));
     for (int i = 0; i < matrix_yn.size(); ++i) {
         matrix_yn[i][0] = original_arr[i + 1];
     }
@@ -83,7 +83,7 @@ vector<double> GM1_1::AverageArray(vector<double> cumulative_arr) {
 }
 
 vector<vector<double>> GM1_1::MatrixB(vector<double> average_arr) {
-    vector<vector<double>> matrix_b(vector<vector<double>>(average_arr.size(), vector<double>(2)));
+    vector<vector<double>> matrix_b(average_arr.size(), vector<double>(2));
     for (int i = 0; i < matrix_b.size(); ++i) {
         matrix_b[i][0] = (-average_arr[i]);
         matrix_b[i][1] = 1.0;
@@ -92,7 +92,7 @@ vector<vector<double>> GM1_1::MatrixB(vector<double> average_arr) {
 }
 
 vector<vector<double>> GM1_1::MatrixBT(vector<vector<double>> matrix_b) {
-    vector<vector<double>> matrix_bt(vector<vector<double>>(2, vector<double>(matrix_b.size())));
+    vector<vector<double>> matrix_bt(2, vector<double>(matrix_b.size()));
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < matrix_b.size(); ++j) {
             matrix_bt[i][j] = matrix_b[j][i];
@@ -102,7 +102,7 @@ vector<vector<double>> GM1_1::MatrixBT(vector<vector<double>> matrix_b) {
 }
 
 vector<vector<double>> GM1_1::MatrixBxBT(vector<vector<double>> matrix_b, vector<vector<double>> matrix_bt) {
-    vector<vector<double>> matrix_b_xbt(vector<vector<double>>(2, vector<double>(2)));
+    vector<vector<double>> matrix_b_xbt(2, vector<double>(2));
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 2; ++j) {
             for (int k = 0; k < matrix_b.size(); ++k) {
@@ -115,7 +115,7 @@ vector<vector<double>> GM1_1::MatrixBxBT(vector<vector<double>> matrix_b, vector
 
 vector<vector<double>> GM1_1::InverseMatrixBxBT(vector<vector<double>> matrix_b_xbt) {
     if (matrix_b_xbt.empty()) return matrix_b_xbt;
-    vector<vector<double>> inverse_matrix_b_xbt(vector<vector<double>>(2, vector<double>(2)));
+    vector<vector<double>> inverse_matrix_b_xbt(2, vector<double>(2));
     double tmp = matrix_b_xbt[0][0] * matrix_b_xbt[1][1] - matrix_b_xbt[0][1] * matrix_b_xbt[1][0];
     inverse_matrix_b_xbt[0][0] = 1.0 / tmp * matrix_b_xbt[1][1];
     inverse_matrix_b_xbt[0][1] = 1.0 / tmp * -matrix_b_xbt[0][1];
@@ -126,7 +126,7 @@ vector<vector<double>> GM1_1::InverseMatrixBxBT(vector<vector<double>> matrix_b_
 
 vector<vector<double>> GM1_1::InverseMatrixBxBTxBT(vector<vector<double>> inverse_matrix_b_xbt, vector<vector<double>> matrix_bt) {
     if (inverse_matrix_b_xbt.empty() || matrix_bt.empty()) return inverse_matrix_b_xbt;
-    vector<vector<double>> inverse_matrix_b_xbt_xbt(vector<vector<double>>(2, vector<double>(matrix_bt[0].size())));
+    vector<vector<double>> inverse_matrix_b_xbt_xbt(2, vector<double>(matrix_bt[0].size()));
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < matrix_bt[0].size(); ++j) {
             for (int k = 0; k < 2; ++k) {
@@ -139,7 +139,7 @@ vector<vector<double>> GM1_1::InverseMatrixBxBTxBT(vector<vector<double>> invers
 
 vector<vector<double>> GM1_1::InverseMatrixBxBTxBTxYN(vector<vector<double>> inverse_matrix_b_xbt_xbt, vector<vector<double>> matrix_yn) {
     if (inverse_matrix_b_xbt_xbt.empty() || matrix_yn.empty()) return inverse_matrix_b_xbt_xbt;
-    vector<vector<double>> inverse_matrix_b_xbt_xbt_xyn(vector<vector<double>>(2, vector<double>(1)));
+    vector<vector<double>> inverse_matrix_b_xbt_xbt_xyn(2, vector<double>(1));
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 1; ++j) {
             for (int k = 0; k < matrix_yn.size(); ++k) {
